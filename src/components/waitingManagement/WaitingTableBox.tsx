@@ -64,10 +64,16 @@ const WaitingTableBox = (props: waitingDataProps) => {
 					<MemoizedWaitingItem waitingInfo={waitingInfo} waitingDataStatus={waitingDataStatus} />
 					{!isWaitingAvailable ? (
 						<MemoizedTableMesesage>
-							<td>대기가 마감되었습니다.</td>
+							<td>
+								대기가 마감되었습니다. <p>대기를 받으시려면 대기 가능 버튼을 클릭해주세요.</p>
+							</td>
 						</MemoizedTableMesesage>
 					) : (
-						<></>
+						<MemoizedTableMesesage>
+							<td>
+								대기를 받고 있습니다. <p>대기 마감을 원하시면 대기 마감 버튼을 클릭해주세요.</p>
+							</td>
+						</MemoizedTableMesesage>
 					)}
 				</WaitingItemList>
 			</table>
@@ -134,8 +140,10 @@ const TableMesesage = styled.tr`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 	td {
 		padding-left: 40px;
 		color: ${({ theme }) => (theme.lightColor ? theme.textColor.black : theme.textColor.white)};
+		line-height: 35px;
 	}
 `;

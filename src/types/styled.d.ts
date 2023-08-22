@@ -3,31 +3,8 @@ import 'styled-components';
 declare module 'styled-components' {
 	// eslint-disable-next-line prettier/prettier
 	export interface DefaultTheme {
-		lightColor?: {
-			pink: {
-				background: string;
-				main: string;
-				sub: string;
-				point: string;
-			};
-			yellow: {
-				background: string;
-				main: string;
-				sub: string;
-				point: string;
-			};
-			blue: {
-				background: string;
-				main: string;
-				sub: string;
-				point: string;
-			};
-		};
-		darkColor?: {
-			background: string;
-			main: string;
-			sub: string;
-			point: string;
+		[mode: string]: {
+			[color: string]: { [usage]: string };
 		};
 
 		textColor: {
@@ -37,6 +14,7 @@ declare module 'styled-components' {
 			darkgray: string;
 			lightbrown: string;
 			darkbrown: string;
+			lightBeige: string;
 		};
 
 		fontWeight: {

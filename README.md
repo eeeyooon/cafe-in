@@ -26,10 +26,9 @@
 
 <br/>
 
-|  [강지윤 FE](https://github.com/eeeyooon)  |  [안유진 FE](https://github.com/Anyudbwls)  |  [오소민 FE](https://github.com/somin00)  |
-| :----------------------------------------: | :-----------------------------------------: | :---------------------------------------: |
-| <img width="200" alt="강지윤 깃허브 프로필 이미지" src="https://github.com/eeeyooon.png"> | <img width="200" alt="안유진 깃허브 프로필 이미지" src="https://github.com/Anyudbwls.png">| <img width="200" alt="오소민 깃허브 프로필 이미지" src="https://github.com/somin00.png">
-
+|                         [강지윤 FE](https://github.com/eeeyooon)                          |                         [안유진 FE](https://github.com/Anyudbwls)                          |                         [오소민 FE](https://github.com/somin00)                          |
+| :---------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
+| <img width="200" alt="강지윤 깃허브 프로필 이미지" src="https://github.com/eeeyooon.png"> | <img width="200" alt="안유진 깃허브 프로필 이미지" src="https://github.com/Anyudbwls.png"> | <img width="200" alt="오소민 깃허브 프로필 이미지" src="https://github.com/somin00.png"> |
 
 <br/>
 <br/>
@@ -56,7 +55,6 @@
 ## 디자인 시안
 
 <img src="https://github.com/eeeyooon/moonbucks/assets/102462534/f4ef925e-92c4-46ad-b1ba-0f632f07178b" alt="카페 인 디자인 시안" width="800">
-
 
 <br/>
 <br/>
@@ -101,6 +99,15 @@
 4. 매출 내역 조회
 5. 포인트 내역 조회
 6. 테마 및 색상 설정
+
+<br/>
+<br/>
+
+## 시연 영상
+
+[▶ 시연 영상 보러가기](https://youtu.be/KNNdaLx0k6o)
+
+[<img src="https://github.com/Cafe-Manage-Service-CAFE-IN/cafe-in/assets/102462534/dc57d9c9-8ca2-46f5-bd68-7d200d14ec6f"  width="500" />](https://youtu.be/KNNdaLx0k6o)
 
 <br/>
 <br/>

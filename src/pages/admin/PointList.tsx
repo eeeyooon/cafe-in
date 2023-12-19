@@ -4,6 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
 import withAuth from '../../components/adminMode/WithAuth';
 import ManagementHeader from '../../components/adminMode/ManagementHeader';
+import { formatTel } from '../../utils/formatTel';
 
 type Points = {
 	id?: string;
@@ -11,15 +12,6 @@ type Points = {
 	phoneNumber: string;
 	point: number;
 };
-
-function underBarPhoneNumber(phoneNumber: string): string {
-	const cleaned = ('' + phoneNumber).replace(/\D/g, ''); // 숫자만 남기기
-	const match = cleaned.match(/^(\d{3})(\d{4})(\d{4})$/); // 정규표현식 사용하여 매칭
-	if (match) {
-		return [match[1], match[2], match[3]].join('-');
-	}
-	return phoneNumber;
-}
 
 function PointList() {
 	const [points, setPoints] = useState<Points[]>([]);
@@ -49,12 +41,9 @@ function PointList() {
 
 		fetchPoints();
 	}, []);
-	// 전체 페이지 수
+
 	const totalPages = Math.ceil(points.length / itemsPerPage);
-
-	// 현재 페이지의 항목 선택
 	const currentItems = points.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
 	const MemoizedTotalMember = React.memo(TotalMember);
 
 	return (
@@ -74,10 +63,10 @@ function PointList() {
 					</THead>
 					<tbody>
 						<tr>
-							{currentItems.map((point) => (
-								<Item key={point.id}>
-									<p className="phoneNum">{underBarPhoneNumber(point.phoneNumber)}</p>
-									<p className="point">{point.point.toLocaleString()}</p>
+							{currentItems.map(({ point, id, phoneNumber }) => (
+								<Item key={id}>
+									<p className="phoneNum">{formatTel(phoneNumber)}</p>
+									<p className="point">{point.toLocaleString()}</p>
 								</Item>
 							))}
 						</tr>

@@ -11,6 +11,7 @@ import {
 	notificationUserState,
 } from '../../state/ModalState';
 import { WaitingDataType } from '../../types/waitingDataType';
+import { formatTel } from '../../utils/formatTel';
 
 type WaitingItemProps = {
 	waitingInfo: WaitingDataType[];
@@ -41,14 +42,6 @@ const WaitingItem = (props: WaitingItemProps) => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [modalUpdate, itemId, modalType]);
-
-	const formatTel = (tel: string) => {
-		const cleanNumber = tel.replace(/\D/g, '');
-		const firstPart = cleanNumber.slice(0, 3);
-		const secondPart = cleanNumber.slice(3, 7);
-		const thirdPart = cleanNumber.slice(7);
-		return `${firstPart}-${secondPart}-${thirdPart}`;
-	};
 
 	const showWaitingList = () => {
 		return waitingInfo

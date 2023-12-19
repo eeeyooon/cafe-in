@@ -40,7 +40,6 @@ function SalesList() {
 		getSales();
 	}, []);
 
-	// 같은 날짜 별로 데이터 그룹화하고 필요한 데이터만 저장
 	useEffect(() => {
 		const salesByDate: { [date: string]: { salesData: totalOrder[]; totalPriceSum: number } } = {};
 
@@ -99,15 +98,11 @@ function SalesList() {
 		setTargetMonth(newTargetMonth);
 	};
 
-	//선택된 날짜에 해당하는 데이터 가져오기
 	const dayData = daySalesData.filter((v) => v.date === displayDate);
-
-	//선택된 달에 해당하는 데이터 가져오기
 	const monthData = daySalesData.filter((data) => {
 		const stringDate = data.date.split('-');
 		const year = parseInt(stringDate[0]);
 		const month = parseInt(stringDate[1]);
-
 		return year === targetYear && month === targetMonth;
 	});
 

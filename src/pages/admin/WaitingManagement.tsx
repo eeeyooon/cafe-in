@@ -9,38 +9,38 @@ import { isWaitingAvailableState } from '../../state/WaitingState';
 import { modalState } from '../../state/ModalState';
 import withAuth from '../../components/adminMode/WithAuth';
 
-type DataStatusProps = {
-	$isWaiting: boolean;
+type ListStatusProps = {
+	$isWaitingList: boolean;
 };
 
-type styleProps = {
+type StyleProps = {
 	$isWaitingAvailable: boolean;
 };
 
 const WaitingManagement = () => {
-	const [isOpenModal, setIsOpenModal] = useRecoilState<boolean>(modalState);
 	const theme = useTheme();
-	const [isWaiting, setIsWaiting] = useState<boolean>(true);
+	const [isOpenModal, setIsOpenModal] = useRecoilState<boolean>(modalState);
+	const [isWaitingList, setIsWaitingList] = useState<boolean>(true);
 	const [isWaitingAvailable, setIsWaitingAvailable] = useRecoilState<boolean>(isWaitingAvailableState);
 
 	const closeModal = () => {
 		setIsOpenModal(false);
 	};
 
-	useEffect(() => {
-		const storedIsWaiting = localStorage.getItem('isWaiting');
-
-		if (storedIsWaiting != null) {
-			setIsWaiting(JSON.parse(storedIsWaiting));
-		}
-
-		localStorage.setItem('isWaitingAvailable', isWaitingAvailable.toString());
-	}, [isWaiting, isWaitingAvailable, setIsWaiting]);
-
-	const handleIsWaitingChange = (newIsWaiting: boolean) => {
-		setIsWaiting(newIsWaiting);
-		localStorage.setItem('isWaiting', JSON.stringify(newIsWaiting));
+	const handleIsWaitingList = (isWaitingList: boolean) => {
+		setIsWaitingList(isWaitingList);
+		localStorage.setItem('isWaitingList', JSON.stringify(isWaitingList));
 	};
+
+	useEffect(() => {
+		localStorage.setItem('isWaitingAvailable', isWaitingAvailable.toString());
+
+		const storedIsWaitingList = localStorage.getItem('isWaitingList');
+
+		if (storedIsWaitingList != null) {
+			setIsWaitingList(JSON.parse(storedIsWaitingList));
+		}
+	}, [isWaitingList, isWaitingAvailable, setIsWaitingList]);
 
 	return (
 		<WaitingManagementWrapper>
@@ -54,9 +54,9 @@ const WaitingManagement = () => {
 							role="button"
 							tabIndex={0}
 							aria-label="대기 중 명단 선택하기"
-							$isWaiting={isWaiting}
+							$isWaitingList={isWaitingList}
 							onClick={() => {
-								handleIsWaitingChange(true);
+								handleIsWaitingList(true);
 							}}
 						>
 							<img
@@ -64,7 +64,7 @@ const WaitingManagement = () => {
 								width={24}
 								height={24}
 								src={
-									isWaiting
+									isWaitingList
 										? process.env.PUBLIC_URL +
 										  (theme.lightColor ? '/assets/admin/check-able_light.svg' : '/assets/admin/check-able_dark.svg')
 										: process.env.PUBLIC_URL + '/assets/admin/check-disable_light.svg'
@@ -77,14 +77,14 @@ const WaitingManagement = () => {
 							role="button"
 							tabIndex={0}
 							aria-label="대기 완료 명단 선택하기"
-							$isWaiting={isWaiting}
+							$isWaitingList={isWaitingList}
 							onClick={() => {
-								handleIsWaitingChange(false);
+								handleIsWaitingList(false);
 							}}
 						>
 							<img
 								src={
-									isWaiting
+									isWaitingList
 										? process.env.PUBLIC_URL + '/assets/admin/check-disable_light.svg'
 										: process.env.PUBLIC_URL +
 										  (theme.lightColor ? '/assets/admin/check-able_light.svg' : '/assets/admin/check-able_dark.svg')
@@ -151,24 +151,24 @@ const ListWrapper = styled.div`
 	height: 32px;
 `;
 
-const WaitingList = styled(NavLink)<DataStatusProps>`
+const WaitingList = styled(NavLink)<ListStatusProps>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: ${({ theme, $isWaiting }) =>
-		$isWaiting ? (theme.lightColor ? theme.textColor.black : theme.textColor.white) : theme.textColor.darkgray};
+	color: ${({ theme, $isWaitingList }) =>
+		$isWaitingList ? (theme.lightColor ? theme.textColor.black : theme.textColor.white) : theme.textColor.darkgray};
 
 	img {
 		margin-right: 10px;
 	}
 `;
 
-const WaitedList = styled(NavLink)<DataStatusProps>`
+const WaitedList = styled(NavLink)<ListStatusProps>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: ${({ theme, $isWaiting }) =>
-		$isWaiting ? theme.textColor.darkgray : theme.lightColor ? theme.textColor.black : theme.textColor.white};
+	color: ${({ theme, $isWaitingList }) =>
+		$isWaitingList ? theme.textColor.darkgray : theme.lightColor ? theme.textColor.black : theme.textColor.white};
 	img {
 		margin-right: 10px;
 	}
@@ -181,7 +181,7 @@ const WaitingBtnWrapper = styled.div`
 	font-weight: ${({ theme }) => theme.fontWeight.bold};
 `;
 
-const WaitingAbleBtn = styled.button<styleProps>`
+const WaitingAbleBtn = styled.button<StyleProps>`
 	width: 137px;
 	height: 54px;
 	background-color: ${({ theme, $isWaitingAvailable }) =>
@@ -212,7 +212,7 @@ const WaitingAbleBtn = styled.button<styleProps>`
 	margin-right: 8px;
 `;
 
-const WaitingDisableBtn = styled.button<styleProps>`
+const WaitingDisableBtn = styled.button<StyleProps>`
 	width: 137px;
 	height: 54px;
 	border-radius: 10px;
